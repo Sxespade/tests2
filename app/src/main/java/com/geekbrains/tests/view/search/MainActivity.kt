@@ -17,7 +17,8 @@ import com.geekbrains.tests.view.details.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.geekbrains.tests.R
+import com.geekbrains.tests.BuildConfig
+import com.geekbrains.tests.R
 import java.util.*
 
 class MainActivity : AppCompatActivity(), ViewSearchContract {
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     }
 
     private fun createRepository(): RepositoryContract {
-        return if (true) {
+        return if (BuildConfig.TYPE == FAKE) {
             FakeGitHubRepository()
         } else {
             GitHubRepository(createRetrofit().create(GitHubApi::class.java))
